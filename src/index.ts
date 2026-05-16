@@ -27,6 +27,7 @@ export default {
       return json({
         message: "Cloudflare Workers skeleton",
         routes: [
+          "/health",
           "/hello",
           "/api",
           "/request (POST)",
@@ -39,6 +40,10 @@ export default {
           "/v1/embeddings (POST)",
         ],
       });
+    }
+
+    if (path === "/health") {
+      return json({ status: "ok", timestamp: new Date().toISOString() });
     }
 
     if (path.startsWith("/hello")) return handleHello(request, env);
